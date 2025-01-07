@@ -2,7 +2,7 @@
   <form class="shadow-md rounded-md p-5 bg-white w-1/5">
     <div class="py-4">
       <h1 class="font-bold text-left py-2">Register</h1>
-      <h6 class="text-slate-600 text-base">Create your account</h6>
+      <h6 class="text-slate-600 text-sm">Create your account</h6>
     </div>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Email</mat-label>
@@ -24,5 +24,31 @@
       </mat-select>
       <mat-icon matPrefix>groups</mat-icon>
     </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="Password" />
+      <mat-icon matPrefix>lock</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" placeholder="Confirm Password" />
+      <mat-icon matPrefix>lock</mat-icon>
+    </mat-form-field>
+
+    <button
+      class="w-full border-collapse rounded-md text-white border-slate-200 disabled:bg-purple-400 py-2 px-3 bg-purple-700"
+      type="submit"
+    >
+      Register
+    </button>
+
+    <div class="my-4">
+      <span class="text-slate-600 text-xs">Already have an account?</span>
+      <a href="" class="text-purple-700 text-sm block" [routerLink]="['/login']"
+        >Login</a
+      >
+    </div>
   </form>
 </div>
