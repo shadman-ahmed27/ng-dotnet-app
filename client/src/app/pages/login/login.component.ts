@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   fb = inject(FormBuilder);
 
+  login() {}
+
   ngOnInit(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
