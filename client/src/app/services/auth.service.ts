@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  apiUrl: string = environment.apiUrl;  
+  apiUrl: string = environment.apiUrl;
 
-  constructor() { }
+  constructor() {}
 
-  login(data:LoginRequest){
-    
-  }
+  login(data: LoginRequest) {}
 }
