@@ -1,7 +1,28 @@
-<div class="h-screen flex items-center justify-center">
-    <form class="shadow-md rounded-md p-5 bg-white w-1/5">
-        <div class="py-4">
-            <h1 class="font-bold text-left py-2">Register</h1>
-        </div>
-    </form>
+<div class="min-h-screen flex items-center justify-center p-4">
+  <form class="shadow-md rounded-md p-5 bg-white w-1/5">
+    <div class="py-4">
+      <h1 class="font-bold text-left py-2">Register</h1>
+      <h6 class="text-slate-600 text-base">Create your account</h6>
+    </div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" />
+      <mat-icon matPrefix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Full Name</mat-label>
+      <input matInput placeholder="Name" />
+      <mat-icon matPrefix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Roles</mat-label>
+      <mat-select multiple>
+        <mat-option>Admin</mat-option>
+        <mat-option>User</mat-option>
+      </mat-select>
+      <mat-icon matPrefix>groups</mat-icon>
+    </mat-form-field>
+  </form>
 </div>
