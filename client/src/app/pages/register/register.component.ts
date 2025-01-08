@@ -9,6 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
+import { Role } from '../../interfaces/role';
+import { RoleService } from '../../services/role.service';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -19,11 +23,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
+  roleService = inject(RoleService);
+  roles$!: Observable<Role[]>;
   fb = inject(FormBuilder);
   registerForm!: FormGroup;
   router = inject(Router);
@@ -40,5 +47,7 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });
+
+    this.roles$ = this.roleService.getRoles();
   }
 }

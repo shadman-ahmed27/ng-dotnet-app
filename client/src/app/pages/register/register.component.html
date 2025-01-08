@@ -16,15 +16,16 @@
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Name" formControlName="fullName"/>
+      <input matInput placeholder="Name" formControlName="fullName" />
       <mat-icon matPrefix>person</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Roles</mat-label>
-      <mat-select multiple>
-        <mat-option>Admin</mat-option>
-        <mat-option>User</mat-option>
+      <mat-select formControlName="roles" multiple>
+        @for (item of roles$ | async; track item){
+        <mat-option [value]="item.name">{{ item.name }}</mat-option
+        >}
       </mat-select>
       <mat-icon matPrefix>groups</mat-icon>
     </mat-form-field>
