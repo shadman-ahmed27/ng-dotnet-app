@@ -1,18 +1,22 @@
 <div class="min-h-screen flex items-center justify-center p-4">
-  <form class="shadow-md rounded-md p-5 bg-white w-1/5" >
+  <form
+    class="shadow-md rounded-md p-5 bg-white w-1/5"
+    [formGroup]="registerForm"
+    (ngSubmit)="register()"
+  >
     <div class="py-4">
       <h1 class="font-bold text-left py-2">Register</h1>
       <h6 class="text-slate-600 text-sm">Create your account</h6>
     </div>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="Email" />
+      <input matInput placeholder="Email" formControlName="email" />
       <mat-icon matPrefix>email</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Name" />
+      <input matInput placeholder="Name" formControlName="fullName"/>
       <mat-icon matPrefix>person</mat-icon>
     </mat-form-field>
 
@@ -31,6 +35,7 @@
         matInput
         type="{{ passwordHide ? 'password' : 'text' }}"
         placeholder="Password"
+        formControlName="password"
       />
       <mat-icon matPrefix>lock</mat-icon>
       <mat-icon (click)="passwordHide = !passwordHide" matSuffix>{{
@@ -44,6 +49,7 @@
         matInput
         type="{{ confirmPasswordHide ? 'password' : 'text' }}"
         placeholder="Password"
+        formControlName="confirmPassword"
       />
       <mat-icon matPrefix>lock</mat-icon>
       <mat-icon
