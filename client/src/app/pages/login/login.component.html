@@ -32,14 +32,14 @@
     <button
       type="submit"
       [disabled]="!form.valid"
-      class="w-full py-3 px-4 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-800 disabled:bg-purple-400 transition duration-300"
+      class="w-full py-3 px-4 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-800 disabled:bg-purple-700 transition duration-300"
     >
       Login
     </button>
 
     <div class="mt-6 text-center">
-      <span class="text-gray-600">Don't have an account?</span>
-      <a class="text-purple-700 hover:underline" [routerLink]="['/register']"
+      <span class="text-gray-600 text-xs">Don't have an account?</span>
+      <a class="text-purple-700 text- hover:underline block" [routerLink]="['/register']"
         >Register</a
       >
     </div>
