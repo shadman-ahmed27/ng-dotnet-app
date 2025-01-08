@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -40,14 +41,29 @@ export class RegisterComponent implements OnInit {
   register() {}
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      fullName: ['', Validators.required],
-      roles: [''],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+    this.registerForm = this.fb.group(
+      {
+        email: ['', Validators.required, Validators.email],
+        fullName: ['', Validators.required],
+        roles: [''],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      },
+      { validator: this.passwordMatchValidator }
+    );
 
     this.roles$ = this.roleService.getRoles();
+  }
+
+  private passwordMatchValidator(
+    control: AbstractControl
+  ): { [key: string]: boolean } | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      return { passwordMismatch: true };
+    }
+    return null;
   }
 }
