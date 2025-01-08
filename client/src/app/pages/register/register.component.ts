@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Role } from '../../interfaces/role';
 import { RoleService } from '../../services/role.service';
 import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +25,7 @@ import { AsyncPipe } from '@angular/common';
     MatSelectModule,
     ReactiveFormsModule,
     AsyncPipe,
+    NgIf
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -43,13 +44,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group(
       {
-        email: ['', Validators.required, Validators.email],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
         fullName: ['', Validators.required],
         roles: [''],
-        password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
-      { validator: this.passwordMatchValidator }
+      {
+        validator: this.passwordMatchValidator,
+      }
     );
 
     this.roles$ = this.roleService.getRoles();
@@ -64,6 +67,7 @@ export class RegisterComponent implements OnInit {
     if (password !== confirmPassword) {
       return { passwordMismatch: true };
     }
+
     return null;
   }
 }

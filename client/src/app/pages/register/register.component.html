@@ -58,8 +58,17 @@
         matSuffix
         >{{ confirmPasswordHide ? "visibility_off" : "visibility" }}</mat-icon
       >
-      
     </mat-form-field>
+    <span
+      *ngIf="
+        registerForm.hasError('passwordMismatch') &&
+        registerForm.get('confirmPassword')?.dirty &&
+        registerForm.get('confirmPassword')?.touched
+      "
+      class="text-red-500 text-xs"
+    >
+      Passwords do not match
+    </span>
 
     <button
       [disabled]="!registerForm.valid"
