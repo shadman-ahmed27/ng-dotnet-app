@@ -93,7 +93,8 @@ namespace API.Controllers
                     Message = "User not found with this email",
                 });
             }
-              var result = await _userManager.CheckPasswordAsync(user,loginDto.Password);
+
+            var result = await _userManager.CheckPasswordAsync(user,loginDto.Password);
 
             if(!result){
                 return Unauthorized(new AuthResponseDto{
@@ -101,6 +102,8 @@ namespace API.Controllers
                     Message= "Invalid Password."
                 });
             }
+
+            
             var token = GenerateToken(user);
 
             return Ok(new AuthResponseDto{
@@ -108,8 +111,12 @@ namespace API.Controllers
                 IsSuccess = true,
                 Message = "Login Success."
             });
+
+
         }
-            private string GenerateToken(AppUser user){
+
+
+        private string GenerateToken(AppUser user){
             var tokenHandler = new JwtSecurityTokenHandler();
             
             var key = Encoding.ASCII
@@ -126,7 +133,9 @@ namespace API.Controllers
                 _configuration.GetSection("JWTSetting").GetSection("validAudience").Value!),
                 new (JwtRegisteredClaimNames.Iss,_configuration.GetSection("JWTSetting").GetSection("validIssuer").Value!)
             ];
-             foreach(var role in roles)
+
+
+            foreach(var role in roles)
 
             {
                 claims.Add(new Claim(ClaimTypes.Role,role));
@@ -141,13 +150,16 @@ namespace API.Controllers
                     SecurityAlgorithms.HmacSha256
                 )
             };
-            
+
+
             var token  = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+           
+
         }
+
         //api/account/detail
-        [Authorize]
         [HttpGet("detail")]
         public async Task<ActionResult<UserDetailDto>> GetUserDetail()
         {
@@ -173,7 +185,10 @@ namespace API.Controllers
                 AccessFailedCount = user.AccessFailedCount,
 
             });
+
         }
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDetailDto>>> GetUsers()
         {
@@ -186,5 +201,7 @@ namespace API.Controllers
 
             return Ok(users);
         }
+
+
     }
 }

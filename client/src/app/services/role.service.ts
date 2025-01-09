@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Role } from '../interfaces/role';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -13,5 +13,5 @@ export class RoleService {
   constructor(private http: HttpClient) {}
 
   getRoles = (): Observable<Role[]> =>
-    this.http.get<Role[]>(`${this.apiUrl}role`);
+    this.http.get<Role[]>(`${this.apiUrl}roles`);
 }

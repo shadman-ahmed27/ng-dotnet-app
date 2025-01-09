@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\API\\API.csproj": {}
+    "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\api\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\API\\API.csproj": {
+    "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\API\\API.csproj",
+        "projectPath": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\api\\API.csproj",
         "packagesPath": "C:\\Users\\shadi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\API\\obj\\",
+        "outputPath": "C:\\Users\\shadi\\desktop\\full-stack-dev\\angular-projects\\jwtauth\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\shadi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -46,6 +46,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.1, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

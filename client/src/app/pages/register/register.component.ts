@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,38 +8,68 @@ import {
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
-import { Role } from '../../interfaces/role';
+import { Router, RouterLink } from '@angular/router';
 import { RoleService } from '../../services/role.service';
 import { Observable } from 'rxjs';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { Role } from '../../interfaces/role';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ValidationError } from '../../interfaces/validation-error';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    RouterLink,
     MatInputModule,
-    MatIconModule,
-    MatSelectModule,
     ReactiveFormsModule,
+    RouterLink,
+    MatSelectModule,
+    MatIconModule,
+    MatSnackBarModule,
     AsyncPipe,
-    NgIf
+    CommonModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
   roleService = inject(RoleService);
+  authService = inject(AuthService);
+  matSnackbar = inject(MatSnackBar);
   roles$!: Observable<Role[]>;
   fb = inject(FormBuilder);
   registerForm!: FormGroup;
   router = inject(Router);
   confirmPasswordHide: boolean = true;
   passwordHide: boolean = true;
+  errors!: ValidationError[];
 
-  register() {}
+  register() {
+    this.authService.register(this.registerForm.value).subscribe({
+      next: (response) => {
+        console.log(response);
+
+        this.matSnackbar.open(response.message, 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+        });
+        this.router.navigate(['/login']);
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err!.status === 400) {
+          this.errors = err!.error;
+          this.matSnackbar.open('Validations error', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+          });
+        }
+      },
+      complete: () => console.log('Register success'),
+    });
+  }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(

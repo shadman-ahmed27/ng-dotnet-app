@@ -4,28 +4,35 @@
     [formGroup]="registerForm"
     (ngSubmit)="register()"
   >
+    @for(error of errors; track error){
+    <div
+      class="bg-red-100 border mb-2 flex flex-col gap-2 border-red-400 text-red-400 px4 py4 rounded-md relative"
+    >
+      <div class="text-xs p-2">{{ error.description }}</div>
+    </div>
+    }
     <div class="py-4">
       <h1 class="font-bold text-left py-2">Register</h1>
       <h6 class="text-slate-600 text-sm">Create your account</h6>
     </div>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" formControlName="email" />
+      <input matInput formControlName="email" />
       <mat-icon matPrefix>email</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Name" formControlName="fullName" />
+      <input matInput formControlName="fullName" />
       <mat-icon matPrefix>person</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Roles</mat-label>
       <mat-select formControlName="roles" multiple>
-        @for (item of roles$ | async; track item){
-        <mat-option [value]="item.name">{{ item.name }}</mat-option
-        >}
+        @for (item of roles$ | async; track item) {
+        <mat-option [value]="item.name">{{ item.name }} </mat-option>
+        }
       </mat-select>
       <mat-icon matPrefix>groups</mat-icon>
     </mat-form-field>
@@ -35,7 +42,6 @@
       <input
         matInput
         type="{{ passwordHide ? 'password' : 'text' }}"
-        placeholder="Password"
         formControlName="password"
       />
       <mat-icon matPrefix>lock</mat-icon>
@@ -49,7 +55,6 @@
       <input
         matInput
         type="{{ confirmPasswordHide ? 'password' : 'text' }}"
-        placeholder="Password"
         formControlName="confirmPassword"
       />
       <mat-icon matPrefix>lock</mat-icon>
